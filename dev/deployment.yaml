@@ -30,12 +30,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: db-credentials
-                key: secret.username
+                key: username
           - name: VAR_ID
             valueFrom:
               secretKeyRef:
                 name: db-credentials
-                key: secret.password
+                key: password
       - image: registry.gcloud101.com/cyberark/secrets-provider-for-k8s:latest
         imagePullPolicy: Always
         name: cyberark-secrets-provider-for-k8s
