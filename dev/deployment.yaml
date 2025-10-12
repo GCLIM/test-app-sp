@@ -59,27 +59,27 @@ spec:
         envFrom:
           - configMapRef:
               name: conjur-connect
-        volumeMounts:
-        - mountPath: /run/conjur
-          name: access-token
-        - mountPath: /etc/conjur/ssl
-          name: conjur-certs
-        - mountPath: /conjur/podinfo
-          name: podinfo
+        # volumeMounts:
+        # - mountPath: /run/conjur
+        #   name: access-token
+        # - mountPath: /etc/conjur/ssl
+        #   name: conjur-certs
+        # - mountPath: /conjur/podinfo
+        #   name: podinfo
       imagePullSecrets:
         - name: gcloud101cred
-      volumes:
-      - emptyDir:
-          medium: Memory
-        name: access-token
-      - emptyDir:
-          medium: Memory
-        name: conjur-certs
-      - downwardAPI:
-          defaultMode: 420
-          items:
-          - fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.annotations
-            path: annotations
-        name: podinfo
+      # volumes:
+      # - emptyDir:
+      #     medium: Memory
+      #   name: access-token
+      # - emptyDir:
+      #     medium: Memory
+      #   name: conjur-certs
+      # - downwardAPI:
+      #     defaultMode: 420
+      #     items:
+      #     - fieldRef:
+      #         apiVersion: v1
+      #         fieldPath: metadata.annotations
+      #       path: annotations
+      #   name: podinfo
