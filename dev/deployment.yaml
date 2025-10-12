@@ -61,7 +61,7 @@ spec:
               name: conjur-connect
         volumeMounts:
         - mountPath: /run/conjur
-          name: conjur-access-token
+          name: access-token
         - mountPath: /etc/conjur/ssl
           name: conjur-certs
         - mountPath: /conjur/podinfo
@@ -71,7 +71,7 @@ spec:
       volumes:
       - emptyDir:
           medium: Memory
-        name: conjur-access-token
+        name: access-token
       - emptyDir:
           medium: Memory
         name: conjur-certs
