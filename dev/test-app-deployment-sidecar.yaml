@@ -23,8 +23,7 @@ spec:
       containers:
       - name: test-app
         image: registry.gcloud101.com/authnk8s/test-app:005
-        command: [ "sleep" ]
-        args: [ "infinity" ]
+        imagePullPolicy: Always
         env:
           - name: DB_USERNAME
             valueFrom:
