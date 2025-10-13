@@ -22,7 +22,7 @@ spec:
       serviceAccountName: test-app-sa
       containers:
       - name: test-app
-        image: registry.gcloud101.com/authnk8s/test-app:006
+        image: registry.gcloud101.com/authnk8s/test-app:007
         imagePullPolicy: Always
         env:
           - name: DEMO_MODE
@@ -60,27 +60,5 @@ spec:
         envFrom:
           - configMapRef:
               name: conjur-connect
-        # volumeMounts:
-        # - mountPath: /run/conjur
-        #   name: access-token
-        # - mountPath: /etc/conjur/ssl
-        #   name: conjur-certs
-        # - mountPath: /conjur/podinfo
-        #   name: podinfo
       imagePullSecrets:
         - name: gcloud101cred
-      # volumes:
-      # - emptyDir:
-      #     medium: Memory
-      #   name: access-token
-      # - emptyDir:
-      #     medium: Memory
-      #   name: conjur-certs
-      # - downwardAPI:
-      #     defaultMode: 420
-      #     items:
-      #     - fieldRef:
-      #         apiVersion: v1
-      #         fieldPath: metadata.annotations
-      #       path: annotations
-      #   name: podinfo
