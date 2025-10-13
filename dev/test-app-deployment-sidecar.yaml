@@ -25,12 +25,14 @@ spec:
         image: registry.gcloud101.com/authnk8s/test-app:005
         imagePullPolicy: Always
         env:
+          - name: DEMO_MODE
+            value: "secrets-provider-k8s"
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
                 name: db-credentials
                 key: username
-          - name: VAR_ID
+          - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: db-credentials
