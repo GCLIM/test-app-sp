@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-app-secrets-provider-k8s-init
+  name: test-app-secrets-provider-k8s-init
+  namespace: test-app-sp-namespace
+spec:
+  selector:
+    matchLabels:
+      app: test-app-secrets-provider-k8s-init
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-app-secrets-provider-k8s-init
+    spec:
+      serviceAccountName: test-app-sa
+      containers:
+      - name: test-app
+        image: registry.gcloud101.com/authnk8s/test-app:009
+        imagePullPolicy: Always
+        env:
+          - name: DEMO_MODE
+            value: "secrets-provider-k8s"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials
+                key: password
+      initContainers:
+      - image: registry.gcloud101.com/cyberark/secrets-provider-for-k8s:latest
+        imagePullPolicy: Always
+        name: cyberark-secrets-provider-for-k8s
+        env:
+          - name: CONJUR_AUTHN_LOGIN
+            value: host/apps/authn-k8s/test-app-sp
+          - name: CONTAINER_MODE
+            value: init
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: K8S_SECRETS
+            value: db-credentials
+          - name: SECRETS_DESTINATION
+            value: k8s_secrets
+        envFrom:
+          - configMapRef:
+              name: conjur-connect
+      imagePullSecrets:
+        - name: gcloud101cred
