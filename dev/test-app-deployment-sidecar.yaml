@@ -41,7 +41,7 @@ spec:
         name: cyberark-secrets-provider-for-k8s
         env:
           - name: CONJUR_AUTHN_LOGIN
-            value: apps/authn-k8s/test-app-sp
+            value: host/apps/authn-k8s/test-app-sp
           - name: CONTAINER_MODE
             value: sidecar
           - name: MY_POD_NAME
