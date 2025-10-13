@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: test-app-secrets-provider-k8s
-  name: test-app-secrets-provider-k8s
+    app: test-app-secrets-provider-k8s-sidecar
+  name: test-app-secrets-provider-k8s-sidecar
   namespace: test-app-sp-namespace
 spec:
   selector:
     matchLabels:
-      app: test-app-secrets-provider-k8s
+      app: test-app-secrets-provider-k8s-sidecar
   replicas: 1
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
         conjur.org/secrets-refresh-enabled: "true"
         conjur.org/secrets-refresh-interval: 10s
       labels:
-        app: test-app-secrets-provider-k8s
+        app: test-app-secrets-provider-k8s-sidecar
     spec:
       serviceAccountName: test-app-sa
       containers:
