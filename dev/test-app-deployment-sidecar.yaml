@@ -37,7 +37,7 @@ spec:
               secretKeyRef:
                 name: db-credentials
                 key: password
-      - image: registry.gcloud101.com/cyberark/secrets-provider-for-k8s:latest
+      - image: registry.gcloud101.com/cyberark/secrets-provider-for-k8s:1.6.3-134
         imagePullPolicy: Always
         name: cyberark-secrets-provider-for-k8s
         env:
